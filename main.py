@@ -17,12 +17,15 @@ def get_config():
 def on_press(key):
     conf_file = get_config()
     key_string = str(key)
+    key_string = key_string.replace('\'', '')
+    key_string = key_string.replace('\"', '')
+    print (key_string)
     try:
-        call_macros = conf_file.get('macros', str(key))
+        call_macros = conf_file.get('macros', key_string)
     except:
         call_macros = "fallback"
     call_macros = "macros." + call_macros + "()"
-    # print (call_macros)
+    #print (call_macros)
     eval(call_macros)
    
 with KeyboardListener(on_press=on_press) as listener:
