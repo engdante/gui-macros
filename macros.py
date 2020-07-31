@@ -7,10 +7,13 @@ import pyautogui
 from PIL import ImageGrab
 from configparser import ConfigParser
 
-import main as main
-
 scrPath = os.path.dirname(os.path.realpath(sys.argv[0]))
 imgPath = scrPath + "\Image"
+
+def get_config():
+    conf_file = ConfigParser()
+    conf_file.read("macros.ini")
+    return conf_file
 
 def get_screen():
     img = ImageGrab.grab(bbox = None)
@@ -26,8 +29,8 @@ def find_pic_in_screen(pic_name):
     img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
     res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
-    conf_file = main.get_config()
-    threshold = conf_file.getfloat('settings', 'threshold')
+    conf_file = get_config()
+    threshold = conf_file.getfloat("settings", "threshold")
     loc = np.where( res >= threshold)
     #print (loc)
     if loc[0].size == 0:
@@ -54,13 +57,30 @@ def macGrid_view_togle():
     except:
         return
     time.sleep(250)
-    icon_name = "show_grid_menu"
+    icon_name = "show_grid_menu.png"
     pic_xy = find_pic_in_screen(icon_name)
     try:
         pyautogui.click(pic_xy[0],pic_xy[1])
     except:
         return
     time.sleep(250)
-   
+    return
+
+def macGrid_onoff_togle():
+    print ("macGrid_onoff_togle is running")
+    icon_name = "view_menu.png"
+    pic_xy = find_pic_in_screen(icon_name)
+    try:
+        pyautogui.click(pic_xy[0],pic_xy[1])
+    except:
+        return
+    time.sleep(250)
+    icon_name = "snap_grid_menu.png"
+    pic_xy = find_pic_in_screen(icon_name)
+    try:
+        pyautogui.click(pic_xy[0],pic_xy[1])
+    except:
+        return
+    time.sleep(250)
     return
 

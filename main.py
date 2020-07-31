@@ -4,27 +4,27 @@ from configparser import ConfigParser
 from pynput import keyboard
 from pynput.keyboard import Listener as KeyboardListener
 
-import macros as macros
+import macros as mac
 
 #Global variables
-os.system('python create_config_file.py')
+os.system("python create_config_file.py")
 
 def get_config():
     conf_file = ConfigParser()
-    conf_file.read('macros.ini')
+    conf_file.read("macros.ini")
     return conf_file
 
 def on_press(key):
     conf_file = get_config()
     key_string = str(key)
-    key_string = key_string.replace('\'', '')
-    key_string = key_string.replace('\"', '')
+    key_string = key_string.replace("\'", "")
+    key_string = key_string.replace("\"", "")
     print (key_string)
     try:
-        call_macros = conf_file.get('macros', key_string)
+        call_macros = conf_file.get("macros", key_string)
     except:
         call_macros = "fallback"
-    call_macros = "macros." + call_macros + "()"
+    call_macros = "mac." + call_macros + "()"
     #print (call_macros)
     eval(call_macros)
    
