@@ -1,0 +1,20 @@
+# while True:
+#     frame = get_screen()
+#     frWidth = frame.shape[1]
+#     frHeight = frame.shape[0]
+#     frameS = cv2.resize(frame, (int(frWidth/4), int(frHeight/4)))
+#     cv2.imshow("Screen", frameS)
+    
+#     logo = find_pic_in_screen("Logo.png")
+#     print (logo)
+    
+#     if cv2.waitKey(2000) == 27:
+#         print('exitting loop')
+#         cv2.destroyAllWindows()
+#         break
+    
+
+icon_name = "Text.png"
+    pic_xy = find_pic_in_screen(icon_name)
+    print (pic_xy)
+    pyautogui.moveTo(pic_xy[0],pic_xy[1])
