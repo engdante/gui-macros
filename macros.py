@@ -82,14 +82,14 @@ def macGrid_view_togle():
     try:
         pyautogui.click(pic_xy[0],pic_xy[1])
     except:
-        return
+        pass
     time.sleep(0.25)
     icon_name = "show_grid_menu.png"
     pic_xy = find_pic_in_screen(icon_name)
     try:
         pyautogui.click(pic_xy[0],pic_xy[1])
     except:
-        return
+        pass
     time.sleep(0.25)
 
     pyautogui.moveTo(current_xy)
@@ -104,17 +104,26 @@ def macGrid_onoff_togle():
     try:
         pyautogui.click(pic_xy[0],pic_xy[1])
     except:
-        return
+        pass
     time.sleep(0.25)
     icon_name = "snap_grid_menu.png"
     pic_xy = find_pic_in_screen(icon_name)
     try:
         pyautogui.click(pic_xy[0],pic_xy[1])
     except:
-        return
+        pass
     time.sleep(0.25)
 
     pyautogui.moveTo(current_xy)
+
+    conf_file = get_config()
+    status_snap = conf_file.getboolean("settings", "disable_gridsnap")
+    if status_snap:
+        set_config("settings", "disable_gridSnap","0")
+    else:
+        set_config("settings", "disable_gridSnap","1")
+    conf_file = get_config()
+
     return
 
 def macMove():

@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 from configparser import ConfigParser
 from pynput.keyboard import Listener as KeyboardListener
 import tkinter as tk
@@ -8,14 +9,20 @@ import macros as mac
 
 #Global variables
 os.system("python create_config_file.py")
-global closeApp
 global window
-closeApp = False
 
 def get_config():
     conf_file = ConfigParser()
     conf_file.read("macros.ini")
     return conf_file
+
+def set_config(level1, level2, value):
+    # print (level1, level2, value)
+    conf_file = ConfigParser()
+    conf_file.read("macros.ini")
+    conf_file.set(level1, level2, value)
+    with open('./macros.ini', 'w') as f:
+        conf_file.write(f)
 
 def on_press(key):
     conf_file = get_config()
@@ -25,6 +32,10 @@ def on_press(key):
     key_string = key_string.replace("\'", "")
     key_string = key_string.replace("\"", "")
     key_string = key_string.lower()
+
+    set_config("settings", "last_key",key_string)
+    conf_file = get_config()
+
     if disable_macros==True and key_string != 'key.caps_lock':
         print ('Macros are DIASBLE !!!')
         return
@@ -36,6 +47,8 @@ def on_press(key):
     call_macros = "mac." + call_macros + "()"
     #print (call_macros)
     eval(call_macros)
+    refreshGui()
+    return
 
 def runListener():
     with KeyboardListener(on_press=on_press) as listener:
@@ -57,14 +70,55 @@ def runGui():
     global window
     window = tk.Tk()
     window.title('User Macros') 
-    window.geometry('425x40')
-    running_label = tk.Label(window, text="Running", fg="blue", font=("Calibri", 14),padx=15, pady=5).grid(row=0, column=0)
-    grid_label = tk.Label(window, text="Grid ON", fg='green', font=("Calibri", 14),padx=15, pady=5).grid(row=0, column=1)
-    key_label = tk.Label(window, text="_", fg='black', font=("Calibri", 14),padx=20, pady=5,relief="groove").grid(row=0, column=2)
-    help_label_1 = tk.Label(window, text="CapsLk - Disable Macros", fg='black', font=("Calibri", 10),padx=15, pady=0, justify="left").grid(row=0, column=3)
+    window.geometry('200x150')
+    global running_label, grid_label, key_label 
+    running_label = tk.Label(window, text="Running", fg="blue", font=("Calibri", 14),padx=10, pady=5)#.place(x = 40, y = 60)
+    # running_label.place(x=20, y=30) 
+    grid_label = tk.Label(window, text="Grid ON", fg='green', font=("Calibri", 14),padx=10, pady=5)
+    # grid_label.grid(row=0, column=1) 
+    key_label = tk.Label(window, text="_", fg='black', font=("Calibri", 14),padx=20, pady=5,relief="groove")
+    # key_label.grid(row=0, column=2) 
+    help_label = tk.Label(window, text="CapsLk - Disable Macros", fg='black', font=("Calibri", 10),padx=15, pady=0, justify="left")
+    # help_label.grid(row=0, column=3) 
+
+    running_label.pack()
+    # running_label.config(text="Stop")
+    
+    grid_label.pack()
+    key_label.pack()
+    help_label.pack()
     
     window.protocol("WM_DELETE_WINDOW", on_closing)
     window.mainloop()
+
+def refreshGui():
+    global window
+    conf_file = get_config()
+    status_macros = conf_file.getboolean("settings", "disable_macros")
+    status_snap = conf_file.getboolean("settings", "disable_gridSnap")
+    last_key = conf_file.get("settings", "last_key")
+    global running_label, grid_label, key_label 
+    if status_macros:
+        text = conf_file.get("settings", "disable_macros_text_1")
+        color = conf_file.get("settings", "disable_macros_color_1")
+        running_label.config(text=text, fg=color)
+    else:
+        text = conf_file.get("settings", "disable_macros_text_0")
+        color = conf_file.get("settings", "disable_macros_color_0")
+        running_label.config(text=text, fg=color)
+    if status_snap:
+        text = conf_file.get("settings", "disable_gridSnap_text_1")
+        color = conf_file.get("settings", "disable_gridSnap_color_1")
+        grid_label.config(text=text, fg=color)
+    else:
+        text = conf_file.get("settings", "disable_gridSnap_text_0")
+        color = conf_file.get("settings", "disable_gridSnap_color_0")
+        grid_label.config(text=text, fg=color)
+
+    key_label.config(text=last_key)
+    
+    time.sleep(0.10)
+    return
 
 import concurrent.futures
 with concurrent.futures.ThreadPoolExecutor() as executor:
