@@ -47,12 +47,14 @@ def on_press(key):
     call_macros = "mac." + call_macros + "()"
     #print (call_macros)
     eval(call_macros)
+    listener.join()
     refreshGui()
     return
 
 def runListener():
-    with KeyboardListener(on_press=on_press) as listener:
+    with KeyboardListener(on_press=on_press, suppress=True) as listener:
         listener.join()
+    return
 
 def on_closing():
     if messagebox.askokcancel("Quit", "Do you want to quit?"):
@@ -70,23 +72,25 @@ def runGui():
     global window
     window = tk.Tk()
     window.title('User Macros') 
-    window.geometry('200x150')
+    window.geometry('200x120')
+    # content = tk.LabelFrame(window).pack()
     global running_label, grid_label, key_label 
-    running_label = tk.Label(window, text="Running", fg="blue", font=("Calibri", 14),padx=10, pady=5)#.place(x = 40, y = 60)
-    # running_label.place(x=20, y=30) 
-    grid_label = tk.Label(window, text="Grid ON", fg='green', font=("Calibri", 14),padx=10, pady=5)
-    # grid_label.grid(row=0, column=1) 
-    key_label = tk.Label(window, text="_", fg='black', font=("Calibri", 14),padx=20, pady=5,relief="groove")
-    # key_label.grid(row=0, column=2) 
-    help_label = tk.Label(window, text="CapsLk - Disable Macros", fg='black', font=("Calibri", 10),padx=15, pady=0, justify="left")
-    # help_label.grid(row=0, column=3) 
-
-    running_label.pack()
-    # running_label.config(text="Stop")
+    running_label = tk.Label(window, text="Running", fg="blue", font=("Calibri", 14))
+    grid_label = tk.Label(window, text="Grid ON", fg='green', font=("Calibri", 14))
+    key_label = tk.Label(window, text="_", fg='black', font=("Calibri", 14),relief="groove")
+    help_label = tk.Label(window, text="CapsLk - Disable Macros", fg='black', font=("Calibri", 10), justify="left")
     
+    # content.pack()
+    running_label.pack()
     grid_label.pack()
     key_label.pack()
     help_label.pack()
+   
+    # content.grid(row=0, column=0)
+    # running_label.grid(row=0, column=0)
+    # grid_label.grid(row=0, column=1)
+    # key_label.grid(row=0, column=2) 
+    # help_label.grid(row=0, column=3)  
     
     window.protocol("WM_DELETE_WINDOW", on_closing)
     window.mainloop()
