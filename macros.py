@@ -64,15 +64,9 @@ def capslock_state():
     return hllDll.GetKeyState(VK_CAPITAL)
 
 def macMacros_togle():
-    # import mainApp as main
     print ("macMacros_togle is running")
-    # # main.pynput.keyboard.listener.stop
-    # # ma.thread2.cancel
-    # keyCont.press(Key.caps_lock)
-    # keyCont.release(Key.caps_lock)
-    # # ma.runListener.listener.join()
     # capslock = capslock_state()
-    # # print (capslock)
+    
     # if capslock == 65409:
     #     set_config("settings", "disable_macros","1")
     #     conf_file = get_config()
