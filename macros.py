@@ -5,11 +5,15 @@ import sys
 import time
 import keyboard
 import mouse
+import pyperclip
 from PIL import ImageGrab
 import config
 
+
 scrPath = os.path.dirname(os.path.realpath(sys.argv[0]))
 imgPath = scrPath + "\Image"
+
+
 
 def get_screen():
     img = ImageGrab.grab(bbox = None)
@@ -37,9 +41,73 @@ def fallback():
     print ("fallback is running")
     return
 
-def macGrid_view_togle():
+def editor_togle():
+    print ("editor_togle is running")
+    return
+
+def rotation():
+    print ("rotation is running")
+    return
+    
+def grab_text():
+    print ("grab_text is running")
+    return
+    
+def same():
+    print ("same is running")
+    return
+    
+def join_pipe():
+    print ("join_pipe is running")
+    return
+    
+def break_pipe():
+    print ("break_pipe is running")
+    return
+    
+def fix_move():
+    print ("fix_move is running")
+    return
+
+def addloop():
+    print ("addloop is running")
     current_xy = mouse.get_position()
-    print ("macGrid_view_togle is running")
+    mouse.move(2400,450,absolute=True)
+    mouse.click()
+    time.sleep(float(config.appSettings["sleep_normal"]))
+    mouse.move(2540, 450,absolute=True)
+    mouse.click()
+    time.sleep(float(config.appSettings["sleep_long"]))
+    keyboard.send("%")
+    keyboard.send(pyperclip.paste())
+    keyboard.send("enter")
+    time.sleep(float(config.appSettings["sleep_long"]))
+    keyboard.send("tab")
+    time.sleep(float(config.appSettings["sleep_long"]))
+    keyboard.send("down")
+    time.sleep(float(config.appSettings["sleep_long"]))
+    keyboard.send("tab, tab")
+    time.sleep(float(config.appSettings["sleep_long"]))
+    keyboard.send("tab, tab")
+    time.sleep(float(config.appSettings["sleep_long"]))
+    keyboard.send("enter")
+    time.sleep(float(config.appSettings["sleep_long"]))
+
+    mouse.move(current_xy[0],current_xy[1],absolute=True)
+    time.sleep(float(config.appSettings["sleep_normal"]))
+    return
+
+def joinloop():
+    print ("joinloop is running")
+    return
+
+def approve():
+    print ("approve is running")
+    return
+
+def grid_view_togle():
+    current_xy = mouse.get_position()
+    print ("grid_view_togle is running")
     
     icon_name = "view_menu.png"
     pic_xy = find_pic_in_screen(icon_name)
@@ -48,7 +116,7 @@ def macGrid_view_togle():
         mouse.click()
     except:
         pass
-    time.sleep(0.25)
+    time.sleep(float(config.appSettings["sleep_normal"]))
     icon_name = "show_grid_menu.png"
     pic_xy = find_pic_in_screen(icon_name)
     try:
@@ -56,14 +124,14 @@ def macGrid_view_togle():
         mouse.click()
     except:
         pass
-    time.sleep(0.25)
+    time.sleep(float(config.appSettings["sleep_normal"]))
 
     mouse.move(current_xy[0],current_xy[1],absolute=True)
     return
 
-def macGrid_onoff_togle():
+def grid_onoff_togle():
     current_xy = mouse.get_position()
-    print ("macGrid_onoff_togle is running")
+    print ("grid_onoff_togle is running")
 
     icon_name = "view_menu.png"
     pic_xy = find_pic_in_screen(icon_name)
@@ -72,7 +140,7 @@ def macGrid_onoff_togle():
         mouse.click()
     except:
         pass
-    time.sleep(0.25)
+    time.sleep(float(config.appSettings["sleep_normal"]))
     icon_name = "snap_grid_menu.png"
     pic_xy = find_pic_in_screen(icon_name)
     try:
@@ -80,7 +148,7 @@ def macGrid_onoff_togle():
         mouse.click()
     except:
         pass
-    time.sleep(0.25)
+    time.sleep(float(config.appSettings["sleep_normal"]))
 
     mouse.move(current_xy[0],current_xy[1],absolute=True)
 
@@ -90,8 +158,8 @@ def macGrid_onoff_togle():
         config.appSettings["disable_gridSnap"] = "1"
     return
 
-def macMove():
-    print ("macMove is running")
+def move():
+    print ("move is running")
     current_xy = mouse.get_position()
 
     icon_name = "move.png"
@@ -101,7 +169,7 @@ def macMove():
         mouse.click()
     except:
         return
-    time.sleep(0.25)
+    time.sleep(float(config.appSettings["sleep_normal"]))
 
     icon_name = "copy_active.png"
     pic_xy = find_pic_in_screen(icon_name)
@@ -110,13 +178,13 @@ def macMove():
         mouse.click()
     except:
         pass
-    time.sleep(0.25)
+    time.sleep(float(config.appSettings["sleep_normal"]))
 
     mouse.move(current_xy[0],current_xy[1],absolute=True)
     return
 
-def macCopy():
-    print ("macCopy is running")
+def copy():
+    print ("copy is running")
     current_xy = mouse.get_position()
 
     icon_name = "move.png"
@@ -126,7 +194,7 @@ def macCopy():
         mouse.click()
     except:
         return
-    time.sleep(0.25)
+    time.sleep(float(config.appSettings["sleep_normal"]))
 
     icon_name = "move_active.png"
     pic_xy = find_pic_in_screen(icon_name)
@@ -135,7 +203,7 @@ def macCopy():
         mouse.click()
     except:
         pass
-    time.sleep(0.25)
+    time.sleep(float(config.appSettings["sleep_normal"]))
 
     mouse.move(current_xy[0],current_xy[1],absolute=True)
     return

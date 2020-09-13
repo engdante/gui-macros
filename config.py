@@ -1,13 +1,26 @@
 appMacros = {
     # 'caps lock' : 'macMacros_togle',
+    'e': 'macros.editor_togle',
+    'r': 'macros.rotation',
+    't': 'macros.grab_text',
+    's': 'macros.same',
     't': 'macros.fallback',
-    'm': 'macros.macMove',
-    'c': 'macros.macCopy',
-    'g': 'macros.macGrid_view_togle',
-    'h': 'macros.macGrid_onoff_togle'
+    'j': 'macros.join_pipe',
+    'b': 'macros.break_pipe',
+    'n': 'macros.fix_move',
+    'm': 'macros.move',
+    'c': 'macros.copy',
+    'g': 'macros.grid_view_togle',
+    'h': 'macros.grid_onoff_togle',
+    'f3': 'macros.addloop',
+    'f4': 'macros.joinloop',
+    'f5': 'macros.approve'
    }
 
 appSettings = {
+    "sleep_short" : 0.15,
+    "sleep_normal" : 0.25,
+    "sleep_long" : 0.35,
     "gui_update_ms" : "500",
     'threshold': '0.95',
     'disable_macros': '0',

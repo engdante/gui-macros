@@ -1,0 +1,125 @@
+F3::
+
+current_xy = mouse.get_position()
+mouse.move(2400,450,absolute=True)
+mouse.click()
+time.sleep(float(config.appSettings["sleep_normal"])
+mouse.move(2540, 450,absolute=True)
+mouse.click()
+time.sleep(float(config.appSettings["sleep_long"])
+keyboard.send(0037)
+keyboard.send(pyperclip.paste())
+keyboard.send("enter")
+time.sleep(float(config.appSettings["sleep_long"])
+keyboard.send("tab"}
+time.sleep(float(config.appSettings["sleep_long"])
+keyboard.send("down"}
+time.sleep(float(config.appSettings["sleep_long"])
+keyboard.send("tab, tab")
+time.sleep(float(config.appSettings["sleep_long"])
+keyboard.send("tab, tab")
+time.sleep(float(config.appSettings["sleep_long"])
+keyboard.send("enter")
+time.sleep(float(config.appSettings["sleep_long"])
+
+mouse.move(current_xy[0],current_xy[1],absolute=True)
+time.sleep(float(config.appSettings["sleep_normal"])
+return
+
+
+F4::
+current_xy = mouse.get_position()
+
+findimage := "Loop.bmp"
+FindImgClick(findimage, 5, 5)
+
+mouse.move(current_xy[0],current_xy[1],absolute=True)
+time.sleep(float(config.appSettings["sleep_normal"])
+return
+
+F5::
+current_xy = mouse.get_position()
+
+findimage := "ApplyButton.bmp"
+FindImgClick(findimage, 5, 5)
+
+mouse.move(current_xy[0],current_xy[1],absolute=True)
+time.sleep(float(config.appSettings["sleep_normal"])
+return
+
+s::
+
+current_xy = mouse.get_position()
+mouse.move(1055, 60
+mouse.click()
+mouse.move(current_xy[0],current_xy[1],absolute=True)
+
+return
+
+t::
+current_xy = mouse.get_position()
+
+mouse.move(%OutputVarX%, %OutputVarY%
+mouse.click()
+Sleep 50
+mouse.move(%OutputVarX%, %OutputVarY%
+mouse.click()
+Sleep 150
+
+Send, {End}
+Sleep 75
+Send, {Space}
+Sleep 75
+Send, {Shift down}{Home}{Shift up}
+Sleep 75
+Send, {Ctrl down}c{Ctrl up}
+Sleep 75
+Send, {Esc}
+Sleep 75
+
+;clipboard := StrReplace(clipboard, "?", Chr(0196)) ; Ä
+clipboard := StrReplace(clipboard, "}", Chr(0220)) ; Ü 
+clipboard := StrReplace(clipboard, "|", Chr(0214)) ; Ö
+clipboard := StrReplace(clipboard, "~", Chr(0223)) ; ß
+clipboard := StrReplace(clipboard, "[", Chr(0228)) ; ä
+clipboard := StrReplace(clipboard, "]", Chr(0252)) ; ü
+clipboard := StrReplace(clipboard, "\", Chr(0246)) ; ö
+clipboard := StrReplace(clipboard, "^", Chr(0176)) ; °
+
+FileAppend , %clipboard%, %A_scriptDir%\OCR.txt 
+FileAppend ,`n, %A_scriptDir%\OCR.txt
+return
+
+j::
+
+
+current_xy = mouse.get_position()
+MouseClick, right, %OutputVarX%, %OutputVarY%
+mouse.right_click()
+Sleep, 175
+Send, {UP 6}
+Send, {ENTER}
+mouse.move(current_xy[0],current_xy[1],absolute=True)
+
+return
+
+b::
+
+current_xy = mouse.get_position()
+MouseClick, right, %OutputVarX%, %OutputVarY%
+mouse.right_click()
+Sleep, 175
+Send, {UP 7}
+Send, {ENTER}
+mouse.move(current_xy[0],current_xy[1],absolute=True)
+
+return
+
+e::
+
+current_xy = mouse.get_position()
+mouse.move(570, 60
+mouse.click()
+mouse.move(current_xy[0],current_xy[1],absolute=True)
+time.sleep(float(config.appSettings["sleep_normal"])
+return
